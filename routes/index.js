@@ -10,6 +10,7 @@ var userController = require('../controllers/user_controller');
 var sessionController = require('../controllers/session_controller');
 
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -26,6 +27,12 @@ router.param('commentId', commentController.load);  // autoload :commentId
 router.get('/session',    sessionController.new);     // formulario login
 router.post('/session',   sessionController.create);  // crear sesión
 router.delete('/session', sessionController.destroy); // destruir sesión
+
+// Definicio de rutas de autor
+
+router.get('/author',   function(req, res, next){
+	res.render('author');
+});
 
 
 // Definición de rutas de cuenta
