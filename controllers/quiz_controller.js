@@ -41,6 +41,18 @@ exports.ownershipRequired = function(req, res, next){
 
 // GET /quizzes
 exports.index = function(req, res, next) {
+
+  if(req.query.search){
+    var buscar = req.query.search.replace(/ /g, "%");
+    models.Quiz.findAll({where: {question: {$like: "%"+buscar+"%"}}})
+      .then(function(quizzes){
+        res.render('quizzes/index.ejs', {quizzes: quizzes});
+      })
+      .catch(function(error){
+        next(error);
+      });
+  }
+  else{
 	models.Quiz.findAll({ include: [ models.Attachment ] })
 		.then(function(quizzes) {
 			res.render('quizzes/index.ejs', { quizzes: quizzes});
@@ -48,6 +60,7 @@ exports.index = function(req, res, next) {
 		.catch(function(error) {
 			next(error);
 		});
+  }
 };
 
 
