@@ -3,6 +3,12 @@ var Sequelize = require('sequelize');
 var url = require('url');
 
 
+//Variables para el autologout
+
+var tiempoSesion = 2*60*1000  //tiempo de sesión (2min)
+
+
+
 // Middleware: Se requiere hacer login.
 //
 // Si el usuario ya hizo login anteriormente entonces existira 
@@ -122,8 +128,8 @@ exports.create = function(req, res, next) {
             if (user) {
                 // Crear req.session.user y guardar campos id y username
                 // La sesión se define por la existencia de: req.session.user
-                req.session.user = {id:user.id, username:user.username, isAdmin:user.isAdmin};
-
+                var caducaSesion = Date.now() + tiempoSesion;
+                req.session.user = {id:user.id, username:user.username, isAdmin:user.isAdmin, caducaSesion:caducaSesion};
                 res.redirect(redir); // redirección a redir
             } else {
                 req.flash('error', 'La autenticación ha fallado. Reinténtelo otra vez.');
@@ -144,3 +150,19 @@ exports.destroy = function(req, res, next) {
     
     res.redirect("/session"); // redirect a login
 };
+
+
+// Autologout
+
+exports.autologout = function(req, res, next){
+    if(req.sesion.user){
+        if(req.session.user.caducaSesion >= Date.now()){
+            req.session.user.caducaSesion = Date.now() + tiempoSesion;
+        }
+        else{
+            delete req.session.user;
+        }
+    }
+    next();
+};
+
