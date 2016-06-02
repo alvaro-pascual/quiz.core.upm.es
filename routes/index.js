@@ -16,6 +16,12 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+// Definicio de rutas de autor
+
+router.get('/author',   function(req, res, next){
+	res.render('author');
+});
+
 
 // Autoload de parametros
 router.param('quizId', quizController.load);  // autoload :quizId
@@ -27,12 +33,6 @@ router.param('commentId', commentController.load);  // autoload :commentId
 router.get('/session',    sessionController.new);     // formulario login
 router.post('/session',   sessionController.create);  // crear sesión
 router.delete('/session', sessionController.destroy); // destruir sesión
-
-// Definicio de rutas de autor
-
-router.get('/author',   function(req, res, next){
-	res.render('author');
-});
 
 
 // Definición de rutas de cuenta
@@ -51,24 +51,24 @@ router.delete('/users/:userId(\\d+)',   sessionController.loginRequired,
 										userController.destroy);  // borrar cuenta
 
 // Definición de rutas de /quizzes
-router.get('/quizzes',                     	quizController.index);
-router.get('/quizzes/:quizId(\\d+)',       	quizController.show);
-router.get('/quizzes/:quizId(\\d+)/check', 	quizController.check);
-router.get('/quizzes/new',                 	sessionController.loginRequired, 
-											quizController.new);
-router.post('/quizzes',                    	sessionController.loginRequired, 
-											upload.single('image'),
-											quizController.create);
-router.get('/quizzes/:quizId(\\d+)/edit',  	sessionController.loginRequired, 
-										   	quizController.ownershipRequired, 
-										   	quizController.edit);
-router.put('/quizzes/:quizId(\\d+)',       	sessionController.loginRequired, 
-											quizController.ownershipRequired, 
-											upload.single('image'),
-											quizController.update);
-router.delete('/quizzes/:quizId(\\d+)',    	sessionController.loginRequired, 
-											quizController.ownershipRequired, 
-											quizController.destroy);
+router.get('/quizzes.:format?',            	 	quizController.index);
+router.get('/quizzes/:quizId(\\d+).:format?',  	quizController.show);
+router.get('/quizzes/:quizId(\\d+)/check', 		quizController.check);
+router.get('/quizzes/new',                 		sessionController.loginRequired, 
+												quizController.new);
+router.post('/quizzes',                    		sessionController.loginRequired, 
+												upload.single('image'),
+												quizController.create);
+router.get('/quizzes/:quizId(\\d+)/edit',  		sessionController.loginRequired, 
+										   		quizController.ownershipRequired, 
+										   		quizController.edit);
+router.put('/quizzes/:quizId(\\d+)',       		sessionController.loginRequired, 
+												quizController.ownershipRequired, 
+												upload.single('image'),
+												quizController.update);
+router.delete('/quizzes/:quizId(\\d+)',    		sessionController.loginRequired, 
+												quizController.ownershipRequired, 
+												quizController.destroy);
 
 // Definición de rutas de comentarios
 router.get('/quizzes/:quizId(\\d+)/comments/new',  sessionController.loginRequired, 

@@ -39,14 +39,22 @@ exports.ownershipRequired = function(req, res, next){
 };
 
 
-// GET /quizzes
+// GET /quizzes      .:format
 exports.index = function(req, res, next) {
 
   if(req.query.search){
     var buscar = req.query.search.replace(/ /g, "%");
     models.Quiz.findAll({where: {question: {$like: "%"+buscar+"%"}}})
       .then(function(quizzes){
-        res.render('quizzes/index.ejs', {quizzes: quizzes});
+        if(!req.params.format || req.params.format === "html"){
+          res.render('quizzes/index.ejs', { quizzes: quizzes});
+        }
+        else if (req.params.format === "json"){
+          res.send(JSON.stringify(quizzes));
+        }
+        else{
+          throw new Error('No se admite formar = ' + req.params.format);
+        }
       })
       .catch(function(error){
         next(error);
@@ -55,7 +63,15 @@ exports.index = function(req, res, next) {
   else{
 	models.Quiz.findAll({ include: [ models.Attachment ] })
 		.then(function(quizzes) {
-			res.render('quizzes/index.ejs', { quizzes: quizzes});
+        if(!req.params.format || req.params.format === "html"){
+          res.render('quizzes/index.ejs', { quizzes: quizzes});
+        }
+        else if (req.params.format === "json"){
+          res.send(JSON.stringify(quizzes));
+        }
+        else{
+          throw new Error('No se admite formar = ' + req.params.format);
+        }
 		})
 		.catch(function(error) {
 			next(error);
@@ -69,8 +85,13 @@ exports.show = function(req, res, next) {
 
 	var answer = req.query.answer || '';
 
-	res.render('quizzes/show', {quiz: req.quiz,
-								answer: answer});
+	 if(req.params.format==="json"){
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(req.quiz));
+  }
+  else{
+    res.render('quizzes/show', {quiz: req.quiz, answer: answer});
+  }
 };
 
 
