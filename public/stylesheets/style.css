@@ -1,4 +1,10 @@
 
+html{
+	position: relative; 
+    min-height: 100%;
+}
+
+
 .navbar {
       margin-bottom: 0;
       border-radius: 0;
@@ -13,13 +19,23 @@
     height: 100%;
     
 }
+body{
+	background-color: #C7C9CD;
+	
+    
+}
+#div_quiz{
+	background-color: white;
+}
 
 #sidebar{
-	color: #366DBF;
+	color: black;
 }
 
 #footer{
 	color: white;
+	border-radius: 10px;
+	background-color: black;
 	
 }
 
@@ -28,9 +44,12 @@
 }
 
 footer {
-    background-color: #555;
+    background-color: black;
     color: white;
     padding: 15px;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
 
  }
 
@@ -41,3 +60,29 @@ footer {
       }
       .row.content {height:auto;} 
       }
+  }
+
+body{
+	height: 100%;
+}
+#titulo{
+	text-align: center;
+	width: 100%;
+	background-color: #C7C9CD;
+	border-color: #C7C9CD;
+	padding: 15px;
+	margin: 0px;
+}
+#div_quiz{
+	padding: 0px;
+}
+#section_quiz{
+	padding: 20px;
+}
+#page-content-row_content{
+	height: 200%;
+}
+#footer:hover{
+	color: black;
+	background-color: white;
+}
