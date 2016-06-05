@@ -6,7 +6,7 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link rel='stylesheet' href='/stylesheets/style.css' />
   
   <link rel='stylesheet'
@@ -57,20 +57,24 @@
      <div class="container-fluid">    
        <div class="row content">
          <div class="col-sm-2 sidenav hidden-xs">
-         <ul class="nav nav-pills nav-stacked">
-            <li><a id ="sidebar" href="/"><strong>Inicio</strong></a></li>
-            <li><a id ="sidebar" href="/quizzes"><strong>Preguntas</strong></a></li>
-            <li><a id ="sidebar" href="/users"><strong>Usuarios</strong></a></li>
-            <li><a id ="sidebar" href="/author"><strong>Autor del proyecto</strong></a></li>
+           <ul class="nav nav-pills nav-stacked">
+              <li><a id ="sidebar" href="/"><strong>Inicio</strong></a></li>
+              <li><a id ="sidebar" href="/quizzes"><strong>Preguntas</strong></a></li>
+              <li><a id ="sidebar" href="/users"><strong>Usuarios</strong></a></li>
+              <li><a id ="sidebar" href="/author"><strong>Autor del proyecto</strong></a></li>
+           </ul>
           </div>
+
           <div class="col-sm-8 text-left"> 
             <h2>Quiz<span class="no-narrow">: el juego de las preguntas</span></h2>
             <section class="main">
-            <div>
-             <%- body %>
-            </div>
+             <div>
+               <%- body %>
+             </div>
+            </section>
           </div>
-      </section>
+          </div>
+          </div>
      
  </header>
        <section>
