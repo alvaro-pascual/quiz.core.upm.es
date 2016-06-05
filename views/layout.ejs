@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <title> Preguntas </title>
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <link rel='stylesheet' 
-        type='text/css'
-        media='only screen and (min-width: 800px) and (min-device-width: 600px)'
-        href='/stylesheets/wide.css' />
+  
   <link rel='stylesheet'
         type='text/css'
         media='only screen and (max-width: 480px)' 
@@ -18,28 +18,61 @@
 <body>
   <div id="page">
     <header class="main">
-
-        <div class="right">
+        <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>                        
+              </button>
+               <a class="navbar-brand" href="#">Logo</a>
+             </div>
+             <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+        
           <% if (!session.user) { %>
-              <a href="/users/new">Registrarse</a> 
-              <a href="/session">Login</a>
+              
+              <li><a href="/users/new">Registrarse</a></li> 
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+              <li><a href="/session"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              </ul>
           <% } else { %>
               <%= session.user.username %> 
-              <a href="/users/<%= session.user.id %>">Perfil</a>
-              <a href="/session?_method=DELETE">Logout</a>
+
+              <li><a href="/users/<%= session.user.id %>">Perfil</a></li>
+              <ul class="nav navbar-nav navbar-right">
+              <li><a href="/session?_method=DELETE">Logout <span class="glyphicon glyphicon-log-out"></span></a></li>
+              </ul>
           <% } %>
-        </div>
 
-      <h2>Quiz<span class="no-narrow">: el juego de las preguntas</span></h2>
-    </header>
+           </div>
+          </div>
+        </nav>
 
-      <nav class="main" role="navigation">
-        <a href="/">Inicio</a>
-        <a href="/quizzes">Preguntas</a>
-        <a href="/users">Usuarios</a>
-        <a href="/author">Autor del proyecto</a>
-      </nav>
+      
+   
 
+     <div class="container-fluid">    
+       <div class="row content">
+         <div class="col-sm-2 sidenav hidden-xs">
+         <ul class="nav nav-pills nav-stacked">
+            <li><a id ="sidebar" href="/"><strong>Inicio</strong></a></li>
+            <li><a id ="sidebar" href="/quizzes"><strong>Preguntas</strong></a></li>
+            <li><a id ="sidebar" href="/users"><strong>Usuarios</strong></a></li>
+            <li><a id ="sidebar" href="/author"><strong>Autor del proyecto</strong></a></li>
+          </div>
+          <div class="col-sm-8 text-left"> 
+            <h2>Quiz<span class="no-narrow">: el juego de las preguntas</span></h2>
+            <section class="main">
+            <div>
+             <%- body %>
+            </div>
+          </div>
+      </section>
+     
+ </header>
        <section>
             <% if (messages.info) { %>
                <article id='flashinfo'>
@@ -75,21 +108,13 @@
             <% } %>
        </section>
 
-      <section class="main">
-        <div>
-          <%- body %>
-        </div>
-      </section>
+      
 
-    <footer class="main">
-      <a href="http://es.wikipedia.org/wiki/Quiz">
-        ¿Que es un Quiz?</a>
+    <footer class="container-fluid text-center">
+
+      <a id="footer" href="http://es.wikipedia.org/wiki/Quiz">¿Que es un Quiz?</a>
+      <a id="footer" class="git" href="https://github.com/alvaro-pascual/quiz.core.upm.es">GitHub</a>
     </footer>
-  </div>
-  <div id="pie_pagina">
-    <footer>
-      <a href="https://github.com/alvaro-pascual/quiz.core.upm.es">GitHub</a>
-    </footer>
-  </div>
+ 
 </body> 
 </html>

@@ -1,27 +1,43 @@
-*                    { margin: 0; padding: 0; }
 
-body                 { font: 16px Georgia, serif; 
-                       color: white;
-                     }
+.navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+}
 
-.page                 { margin: 2% auto; 
-                        color: white;}
+.row.content {height: 450px}
+    
+    
+.sidenav {
+    padding-top: 20px;
+    background-color: #C7C9CD;
+    height: 100%;
+    
+}
 
-.main                 { border: 1px solid #999; 
-                        padding: 1%;
-                        margin-bottom: 1px;
-                        color: black;
-                        background: #eee;
-                      }
+#sidebar{
+	color: #366DBF;
+}
 
-a                    { color: #00B7FF; }
+#footer{
+	color: white;
+	
+}
 
+.git{
+	float: right;
+}
 
-section > div        { padding: 20px; }
+footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
 
-header               { text-align: center;}
-nav                  { text-align: center;}
-section              { text-align: left;}
-footer               { text-align: center;}
+ }
 
-nav a                { margin: 0px 10px 0px 0px;}
+@media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+      }
