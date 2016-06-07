@@ -2,9 +2,9 @@
 
 <p>
   <form method="get" action="/quizzes/<%= quiz.id %>/check">
-    <p>
+    <h3>
       <%= quiz.question %>
-    </p>
+    </h3>
 
     <p>
      <% if (quiz.AuthorId) {
@@ -27,7 +27,7 @@
 
     <p>
       <input type="text" name="answer" value="<%= answer %>" placeholder="Respuesta" />
-      <input type="submit" value="Comprobar">
+      <input role="buttom" class="btn btn-primary" type="submit" value="Comprobar">
     </p>
   </form>
 </p>
@@ -36,16 +36,17 @@
 
 <% if (session.user) { %>
   <p>
-    <a href="/quizzes/<%= quiz.id %>/comments/new"><button>Nuevo comentario</button></a>
+    <a href="/quizzes/<%= quiz.id %>/comments/new"><button class="btn btn-success">Nuevo comentario</button></a>
   </p>
 <% } %>
 
-<ul>
+<table class="table table-hover">
   <% for (var i in quiz.Comments) { 
        var comment = quiz.Comments[i];
        if (comment.accepted) { %>
-           <li> <%= comment.text %> </li>
-           <p>
+       <tr>
+           <td> <%= comment.text %> </td>
+           <td>
             <% if(comment.AuthorId) { 
                 if (comment.Author) { %>
                     Por <a href="/users/<%= comment.AuthorId %>"><%= comment.Author.username %></a>
@@ -55,11 +56,12 @@
             <% } else{ %>
               Por usuario anónimo
               <% } %>
-            </p>
+            </td>
        <% } else if (session.user && 
                      (session.user.isAdmin || (quiz.AuthorId === session.user.id))) { %>
-           <li> <%= comment.text %> </li>
-           <p>
+          <tr>
+           <td> <%= comment.text %> </td>
+           <td>
             <% if(comment.AuthorId) {
                 if(comment.Author) { %>
                  (Por <a href="/users/<%= comment.AuthorId %>"><%= comment.Author.username %></a>)
@@ -69,10 +71,14 @@
             <% } else{ %>
               Por usuario anónimo
             <% } %>
-            </p>
+            </td>
+            <td>
            <a href="/quizzes/<%= quiz.id %>/comments/<%= comment.id %>/accept?_method=PUT">
-              <button>Aceptar</button>
+              <button class="btn btn-info">Aceptar</button>
            </a>
+           </td>
+           </tr>
+        </tr>
        <% } %>
   <% } %>
-</ul>
+</table>

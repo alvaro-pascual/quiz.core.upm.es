@@ -14,7 +14,7 @@
   <p>
     <% if (session.user.isAdmin || session.user.id === user.id) { %>
       <a href="/users/<%= user.id %>/edit"> 
-        <button type="button"> Editar </button>
+        <button type="button" class="btn btn-warning"> Editar </button>
       </a>
     <% } %>
     <% if (session.user.isAdmin && session.user.id !== user.id) { %>
@@ -29,5 +29,5 @@
 <% } %>
 
 <a href="/users"> 
-   <button type="button">Volver</button>
+   <button type="button" class="btn btn-danger">Volver</button>
 </a>

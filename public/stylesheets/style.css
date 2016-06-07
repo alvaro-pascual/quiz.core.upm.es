@@ -21,11 +21,13 @@ html{
 }
 body{
 	background-color: #C7C9CD;
+	height: 100%;
 	
     
 }
 #div_quiz{
 	background-color: white;
+
 }
 
 #sidebar{
@@ -49,8 +51,18 @@ footer {
     padding: 15px;
     bottom: 0;
     position: absolute;
+    object-position: bottom;
+
     width: 100%;
 
+ }
+
+ #a_user{
+ 	width: 150px;
+ }
+
+ #a_crear_user{
+ 	float: right;
  }
 
 @media screen and (max-width: 767px) {
@@ -74,7 +86,10 @@ body{
 	margin: 0px;
 }
 #div_quiz{
-	padding: 0px;
+	
+	padding-bottom: 60px;
+	padding-left: 0;
+	padding-right: 0;
 }
 #section_quiz{
 	padding: 20px;
