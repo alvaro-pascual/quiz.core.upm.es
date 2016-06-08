@@ -30,7 +30,11 @@ exports.index = function(req, res, next) {
 
 // GET /users/:id
 exports.show = function(req, res, next) {
-    res.render('users/show', {user: req.user});
+   models.Quiz.findAll({ where: { AuthorId: req.user.id }}).then(function(quizzes) {
+    models.Comment.findAll({ where: { AuthorId: req.user.id }}).then(function(comentarios) {
+       res.render('users/show', { user: req.user, quizzes: quizzes, comentarios: comentarios });
+    });
+   });
 };
 
 
